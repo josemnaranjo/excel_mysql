@@ -1,12 +1,16 @@
 import {User} from '../models/User.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import {wb , colEstilo , contenidoEstilo} from '../config/excel4node.config.js'
+import {wb, colEstilo, contenidoEstilo} from '../config/excel4node.config.js'
 import fs from 'fs';
 
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+let date = new Date();
+let fechaMes = (date.getUTCMonth())+1;
+let fechaAno = date.getFullYear();
 
 export const addUser = async(req,res)=>{
     try{
@@ -26,10 +30,6 @@ export const addUser = async(req,res)=>{
 
 export const getUsers = async(req,res)=>{
     try{
-        let date = new Date();
-        let fechaMes = (date.getUTCMonth())+1;
-        let fechaAno = date.getFullYear();
-
         //definir el nombre del archivo excel
         let nombreArchivo = "usuarios" + fechaMes + "_" + fechaAno;
         //definir nombre de la pestaña
@@ -68,9 +68,9 @@ export const getUsers = async(req,res)=>{
                 })
             }
         })
-
-
     }catch(err){
         res.status(500).json({error:"Algo salió mal"})
     }
-}
+};
+
+
