@@ -1,8 +1,6 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import xl from 'excel4node'
-import fs from 'fs';
 import {sequelize} from './server/config/mysql.config.js';
 import userRoutes from './server/routes/user.routes.js';
 

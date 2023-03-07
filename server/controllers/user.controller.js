@@ -2,7 +2,10 @@ import {User} from '../models/User.js';
 import path from 'path';
 import xl from 'excel4node';
 import fs from 'fs';
+import { fileURLToPath } from 'url';
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename);
 
 export const addUser = async(req,res)=>{
     try{
@@ -25,13 +28,13 @@ export const getUsers = async(req,res)=>{
         let fechaAno = date.getFullYear();
 
 
-        //creación de nueva instancia de WorkBook
+        // //creación de nueva instancia de WorkBook
         var wb = new xl.Workbook();
         //definir el nombre del archivo excel
         let nombreArchivo = "usuarios" + fechaMes + "_" + fechaAno;
         //definir nombre de la pestaña
         var ws = wb.addWorksheet("Informe de usuarios");
-        //definir estilos
+        // //definir estilos
         var colEstilo = wb.createStyle({
             font:{
                 name: 'Arial',
@@ -54,6 +57,7 @@ export const getUsers = async(req,res)=>{
 
         //obtener a los usuarios
         const users = await User.findAll();
+
 
         let cualFila = 2
         users.forEach(usuarioActual => {
