@@ -12,7 +12,9 @@ export const addUser = async(req,res)=>{
     try{
         const newUser = await User.create({
             name:req.body.name,
-            lastName:req.body.lastName
+            lastName:req.body.lastName,
+            horaInicio: req.body.horaInicio,
+            horaFinal:req.body.horaFinal
         });
         res.json({message:"Usuario creado exitosamente", newUser})
 
@@ -35,6 +37,8 @@ export const getUsers = async(req,res)=>{
 
         ws.cell(1,1).string("nombre").style(colEstilo);
         ws.cell(1,2).string("apellido").style(colEstilo);
+        ws.cell(1,3).string("Hora Inicio").style(colEstilo);
+        ws.cell(1,4).string("Hora Final").style(colEstilo);
 
         //obtener a los usuarios
         const users = await User.findAll();
@@ -44,6 +48,8 @@ export const getUsers = async(req,res)=>{
         users.forEach(usuarioActual => {
             ws.cell(cualFila,1).string(usuarioActual.name).style(contenidoEstilo);
             ws.cell(cualFila,2).string(usuarioActual.lastName).style(contenidoEstilo);
+            ws.cell(cualFila,3).string(usuarioActual.horaInicio).style(contenidoEstilo);
+            ws.cell(cualFila,4).string(usuarioActual.horaFinal).style(contenidoEstilo);
             cualFila++
         });
 

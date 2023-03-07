@@ -12,6 +12,12 @@ export const User = sequelize.define('User',{
     },
     lastName:{
         type: DataTypes.STRING,
+    },
+    horaInicio: {
+        type: DataTypes.TIME,
+    },
+    horaFinal:{
+        type:DataTypes.TIME
     }
 },{
     timestamps: false
