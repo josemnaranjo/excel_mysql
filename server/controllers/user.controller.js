@@ -43,7 +43,6 @@ export const getUsers = async(req,res)=>{
         //obtener a los usuarios
         const users = await User.findAll();
 
-
         let cualFila = 2
         users.forEach(usuarioActual => {
             ws.cell(cualFila,1).string(usuarioActual.name).style(contenidoEstilo);
