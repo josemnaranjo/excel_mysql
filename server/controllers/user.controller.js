@@ -1,10 +1,11 @@
 import {User} from '../models/User.js';
 import path from 'path';
-import xl from 'excel4node';
-import fs from 'fs';
 import { fileURLToPath } from 'url';
+import {wb , colEstilo , contenidoEstilo} from '../config/excel4node.config.js'
+import fs from 'fs';
 
-const __filename = fileURLToPath(import.meta.url)
+
+const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export const addUser = async(req,res)=>{
@@ -27,30 +28,10 @@ export const getUsers = async(req,res)=>{
         let fechaMes = (date.getUTCMonth())+1;
         let fechaAno = date.getFullYear();
 
-
-        // //creación de nueva instancia de WorkBook
-        var wb = new xl.Workbook();
         //definir el nombre del archivo excel
         let nombreArchivo = "usuarios" + fechaMes + "_" + fechaAno;
         //definir nombre de la pestaña
         var ws = wb.addWorksheet("Informe de usuarios");
-        // //definir estilos
-        var colEstilo = wb.createStyle({
-            font:{
-                name: 'Arial',
-                color:'#000000',
-                size: 12,
-                bold: true
-            }
-        });
-
-        var contenidoEstilo = wb.createStyle({
-            font:{
-                name: 'Arial',
-                color:'#494949',
-                size: 11,
-            }
-        });
 
         ws.cell(1,1).string("nombre").style(colEstilo);
         ws.cell(1,2).string("apellido").style(colEstilo);
